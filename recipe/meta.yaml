@@ -1,5 +1,6 @@
 {% set name = "wagtail-nav-menus" %}
 {% set version = "3.12.0" %}
+{% set python_min = "3.10" %}
 
 package:
   name: {{ name|lower }}
@@ -12,15 +13,15 @@ source:
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.8,<4.0
+    - python {{ python_min }}
     - pip
     - poetry-core >=1.9.1
   run:
-    - python >=3.8,<4.0
+    - python >={{ python_min }},<4.0
     - wagtail >=5.2,<6.4
     - wagtail-modeladmin >=2.1.0,<3.0.0
 
@@ -31,6 +32,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://gitlab.com/thelabnyc/wagtail-nav-menus
